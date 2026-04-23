@@ -4,100 +4,104 @@
   <title>GODFATHER</title>
 
   <style>
+    *{box-sizing:border-box;}
+
     body {
-  margin: 0;
-  background: black;
-  color: white;
-  font-family: Arial;
-  text-align: center;
-  min-height: 100vh;
-  padding: 30px 15px;
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
     }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
+    .container {
+      width: 100%;
+      max-width: 600px;
     }
-
-   .container {
-  width: 100%;
-  max-width: 650px;
-  margin: auto;
-   }
 
     .title {
-      .title { font-size: 42px; }
-.box { font-size: 18px; }
-.btn { font-size: 20px; }
-      text-shadow: 0 0 10px #00c3ff;
+      font-size: 40px;
+      text-shadow: 0 0 12px #00c3ff;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-      100% { transform: scale(1); }
+      0% {transform: scale(1);}
+      50% {transform: scale(1.05);}
+      100% {transform: scale(1);}
     }
 
     .count {
       color: red;
+      font-size: 24px;
       text-shadow: 0 0 10px red;
-      font-size: 22px;
     }
 
     .box {
       border: 1px solid #555;
-      padding: 14px;
-      margin: 10px 0;
+      padding: 15px;
+      margin: 12px 0;
       border-radius: 8px;
-      transition: 0.3s;
-    }
-
-    .box:hover {
-      border-color: #00c3ff;
-      transform: scale(1.04);
+      font-size: 18px;
     }
 
     .btn {
       display: block;
       margin-top: 20px;
       padding: 16px;
+      font-size: 20px;
       border-radius: 10px;
       background: linear-gradient(45deg, red, blue);
       color: white;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      animation: btn 2s infinite;
+      animation: zoom 1.5s infinite;
     }
 
-    @keyframes btn {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
+    @keyframes zoom {
+      0% {transform: scale(1);}
+      50% {transform: scale(1.08);}
+      100% {transform: scale(1);}
     }
 
     .users {
-      margin-top: 10px;
-      font-size: 15px;
+      margin-top: 12px;
+      font-size: 16px;
       color: #ccc;
     }
 
     .joined {
-      font-size: 15px;
+      font-size: 16px;
       color: #39ff14;
       text-shadow: 0 0 8px #39ff14;
       margin-top: 5px;
+    }
+
+    /* 🚀 rocket */
+    #rocket {
+      position: fixed;
+      font-size: 26px;
+      animation: fly 8s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fly {
+      0% { top: 80%; left: 10%; }
+      25% { top: 10%; left: 80%; }
+      50% { top: 5%; left: 50%; }
+      75% { top: 40%; left: 5%; }
+      100% { top: 80%; left: 10%; }
     }
 
   </style>
 </head>
 
 <body>
-
-<canvas id="bg"></canvas>
 
 <div class="container">
 
@@ -112,89 +116,62 @@
   <div class="box">IPL ALL MATCH PASS</div>
   <div class="box">CPL ALL MATCH PASS</div>
 
-  <a href="https://t.me/+ZVFkgzeA-2llODJl" class="btn" onclick="playSound()">
+  <a href="https://t.me/+ZVFkgzeA-2llODJl" class="btn" onclick="go(event)">
     JOIN THE CHANNEL NOW 🚀
   </a>
 
-  <div class="users">🔥 <span id="users">128</span> users watching now</div>
+  <div class="users">🔥 <span id="users">120</span> users watching</div>
   <div class="joined">✔ <span id="joined">384</span> joined</div>
 
 </div>
 
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<div id="rocket">🚀</div>
+
+<audio id="sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
 
 <script>
+
   // countdown
-  let time = 60;
-  setInterval(() => {
-    time = time > 0 ? time - 1 : 60;
-    document.getElementById("count").innerText = time;
-  }, 1000);
+  let t = 60;
+  setInterval(()=>{
+    t = t>0 ? t-1 : 60;
+    document.getElementById("count").innerText = t;
+  },1000);
 
-  // fake watching users
-  let users = 120;
-  setInterval(() => {
-    users += Math.floor(Math.random()*5 - 2);
-    if(users < 100) users = 100;
-    document.getElementById("users").innerText = users;
-  }, 2000);
+  // watching users
+  let u = 120;
+  setInterval(()=>{
+    u += Math.floor(Math.random()*5 - 2);
+    if(u < 100) u = 100;
+    document.getElementById("users").innerText = u;
+  },2000);
 
-  // joined users (increase slowly)
-  let let joined = 384;
+  // realistic joined
+  let j = 384;
+  function updateJoined(){
+    let delay = Math.random()*4000 + 1000; // 1–5 sec
+    let inc = Math.floor(Math.random()*3)+1; // 1–3 users
 
-function updateJoined(){
-  let randomTime = Math.floor(Math.random() * 4000) + 1000; // 1–5 sec
+    j += inc;
+    document.getElementById("joined").innerText = j;
 
-  let increase = Math.floor(Math.random() * 3) + 1; // 1–3 users
+    setTimeout(updateJoined, delay);
+  }
+  updateJoined();
 
-  joined += increase;
-  document.getElementById("joined").innerText = joined;
+  // sound + redirect
+  function go(e){
+    e.preventDefault();
 
-  setTimeout(updateJoined, randomTime);
-}
+    let s = document.getElementById("sound");
+    s.currentTime = 0;
+    s.play().catch(()=>{});
 
-updateJoined();
-
-  // click sound
-  function playSound(){
-    document.getElementById("clickSound").play();
+    setTimeout(()=>{
+      window.location.href = "https://t.me/+ZVFkgzeA-2llODJl";
+    },300);
   }
 
-  // particles
-  const canvas = document.getElementById("bg");
-  const ctx = canvas.getContext("2d");
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let particles = [];
-
-  for(let i=0;i<60;i++){
-    particles.push({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      r: Math.random()*2,
-      d: Math.random()*1
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="white";
-
-    particles.forEach(p=>{
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fill();
-
-      p.y += p.d;
-      if(p.y > canvas.height) p.y = 0;
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  draw();
 </script>
 
 </body>
