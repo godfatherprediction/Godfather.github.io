@@ -12,13 +12,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       overflow: hidden;
     }
 
     canvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       z-index: 0;
@@ -27,63 +27,72 @@
     .container {
       position: relative;
       z-index: 1;
-      width: 90%;
-      max-width: 350px;
+      width: 95%;
+      max-width: 500px;
+      padding: 20px;
     }
 
     .title {
-      font-size: 30px;
-      color: white;
+      font-size: 38px;
       text-shadow: 0 0 10px #00c3ff;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.06); }
       100% { transform: scale(1); }
     }
 
     .count {
       color: red;
       text-shadow: 0 0 10px red;
+      font-size: 22px;
     }
 
     .box {
       border: 1px solid #555;
-      padding: 12px;
-      margin: 10px;
+      padding: 14px;
+      margin: 10px 0;
       border-radius: 8px;
       transition: 0.3s;
     }
 
     .box:hover {
       border-color: #00c3ff;
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
     .btn {
       display: block;
       margin-top: 20px;
-      padding: 14px;
+      padding: 16px;
       border-radius: 10px;
       background: linear-gradient(45deg, red, blue);
       color: white;
       text-decoration: none;
       font-weight: bold;
+      font-size: 18px;
       animation: btn 2s infinite;
     }
 
     @keyframes btn {
       0% { transform: scale(1); }
-      50% { transform: scale(1.07); }
+      50% { transform: scale(1.08); }
       100% { transform: scale(1); }
     }
 
     .users {
       margin-top: 10px;
-      font-size: 13px;
-      color: #aaa;
+      font-size: 15px;
+      color: #ccc;
+    }
+
+    .joined {
+      font-size: 15px;
+      color: #39ff14;
+      text-shadow: 0 0 8px #39ff14;
+      margin-top: 5px;
     }
 
   </style>
@@ -111,6 +120,7 @@
   </a>
 
   <div class="users">🔥 <span id="users">128</span> users watching now</div>
+  <div class="joined">✔ <span id="joined">384</span> joined</div>
 
 </div>
 
@@ -124,7 +134,7 @@
     document.getElementById("count").innerText = time;
   }, 1000);
 
-  // fake users
+  // fake watching users
   let users = 120;
   setInterval(() => {
     users += Math.floor(Math.random()*5 - 2);
@@ -132,7 +142,14 @@
     document.getElementById("users").innerText = users;
   }, 2000);
 
-  // sound
+  // joined users (increase slowly)
+  let joined = 384;
+  setInterval(() => {
+    joined += 1;
+    document.getElementById("joined").innerText = joined;
+  }, 3000);
+
+  // click sound
   function playSound(){
     document.getElementById("clickSound").play();
   }
