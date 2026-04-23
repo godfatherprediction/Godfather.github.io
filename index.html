@@ -5,83 +5,174 @@
 
   <style>
     body {
+      margin: 0;
       background: black;
       color: white;
-      text-align: center;
       font-family: Arial;
-      margin: 0;
-      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
     }
 
-    h1 {
-      margin-top: 60px;
-      font-size: 40px;
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
 
-    .box {
-      border: 1px solid white;
-      padding: 12px;
-      margin: 15px auto;
-      width: 80%;
-      max-width: 300px;
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 90%;
+      max-width: 350px;
     }
 
-    .btn {
-      background: blue;
+    .title {
+      font-size: 30px;
       color: white;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 18px;
-      display: inline-block;
-      margin-top: 30px;
-      text-decoration: none;
-      animation: zoom 1.2s infinite;
+      text-shadow: 0 0 10px #00c3ff;
+      animation: pulse 2s infinite;
     }
 
-    @keyframes zoom {
+    @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
 
-    .small {
-      margin-top: 15px;
-      color: #ccc;
+    .count {
+      color: red;
+      text-shadow: 0 0 10px red;
     }
+
+    .box {
+      border: 1px solid #555;
+      padding: 12px;
+      margin: 10px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .box:hover {
+      border-color: #00c3ff;
+      transform: scale(1.03);
+    }
+
+    .btn {
+      display: block;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      background: linear-gradient(45deg, red, blue);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      animation: btn 2s infinite;
+    }
+
+    @keyframes btn {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+
+    .users {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <h1>👑 GODFATHER 👑</h1>
+<canvas id="bg"></canvas>
 
-  <h3>Since 2017</h3>
+<div class="container">
 
+  <h1 class="title">👑 GODFATHER 👑</h1>
+
+  <p>Since 2017</p>
   <p>💯 Accuracy ke sath 💯</p>
 
-  <h2>Seconds Left... <span id="count">60</span></h2>
+  <h2>Seconds Left... <span class="count" id="count">60</span></h2>
 
-  <div class="box">⚡ BACK-TO-BACK MATCH PASS ⚡</div>
-  <div class="box">IPL ALL MATCH PASS ✔</div>
-  <div class="box">CPL ALL MATCH PASS ✔</div>
+  <div class="box">⚡ BACK-TO-BACK MATCH PASS</div>
+  <div class="box">IPL ALL MATCH PASS</div>
+  <div class="box">CPL ALL MATCH PASS</div>
 
-  <a href="https://t.me/+ZVFkgzeA-2llODJl" class="btn">
+  <a href="https://t.me/+ZVFkgzeA-2llODJl" class="btn" onclick="playSound()">
     JOIN THE CHANNEL NOW 🚀
   </a>
 
-  <div class="small">click to join the channel 👇</div>
+  <div class="users">🔥 <span id="users">128</span> users watching now</div>
 
-  <script>
-    let time = 60;
-    let counter = document.getElementById("count");
+</div>
 
-    setInterval(() => {
-      if(time > 0){
-        time--;
-        counter.innerText = time;
-      }
-    }, 1000);
-  </script>
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
+<script>
+  // countdown
+  let time = 60;
+  setInterval(() => {
+    time = time > 0 ? time - 1 : 60;
+    document.getElementById("count").innerText = time;
+  }, 1000);
+
+  // fake users
+  let users = 120;
+  setInterval(() => {
+    users += Math.floor(Math.random()*5 - 2);
+    if(users < 100) users = 100;
+    document.getElementById("users").innerText = users;
+  }, 2000);
+
+  // sound
+  function playSound(){
+    document.getElementById("clickSound").play();
+  }
+
+  // particles
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  for(let i=0;i<60;i++){
+    particles.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*2,
+      d: Math.random()*1
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+
+      p.y += p.d;
+      if(p.y > canvas.height) p.y = 0;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
 
 </body>
 </html>
