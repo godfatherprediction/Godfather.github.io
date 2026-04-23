@@ -35,7 +35,7 @@
     }
 
     .title {
-  font-size: 80px;
+  font-size: 100px;
   font-weight: bold;
   text-shadow: 0 0 30px #00c3ff;
   animation: pulse 2s infinite;
@@ -123,7 +123,7 @@
   <p style="font-size:40px;">Since 2017</p>
   <p style="font-size:40px;">💯 Accuracy ke sath 💯</p>
 
-  <h2>Seconds Left... <span class="count" id="count">60</span></h2>
+  <h1>Seconds Left... <span class="count" id="count">60</span></h1>
 
   <div class="box">⚡ BACK-TO-BACK MATCH PASS</div>
   <div class="box">IPL ALL MATCH PASS</div>
@@ -144,7 +144,7 @@
 
 <script>
   // countdown
-  let t = 60;
+  let t = 48;
   setInterval(()=>{
     t = t>0 ? t-1 : 60;
     document.getElementById("count").innerText = t;
