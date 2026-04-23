@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GODFATHER</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 60px;
+      font-size: 40px;
+    }
+
+    .box {
+      border: 1px solid white;
+      padding: 12px;
+      margin: 15px auto;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .btn {
+      background: blue;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 18px;
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      animation: zoom 1.2s infinite;
+    }
+
+    @keyframes zoom {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .small {
+      margin-top: 15px;
+      color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>👑 GODFATHER 👑</h1>
+
+  <h3>Since 2017</h3>
+
+  <p>💯 Accuracy ke sath 💯</p>
+
+  <h2>Seconds Left... <span id="count">60</span></h2>
+
+  <div class="box">⚡ BACK-TO-BACK MATCH PASS ⚡</div>
+  <div class="box">IPL ALL MATCH PASS ✔</div>
+  <div class="box">CPL ALL MATCH PASS ✔</div>
+
+  <a href="https://t.me/+ZVFkgzeA-2llODJl" class="btn">
+    JOIN THE CHANNEL NOW 🚀
+  </a>
+
+  <div class="small">click to join the channel 👇</div>
+
+  <script>
+    let time = 60;
+    let counter = document.getElementById("count");
+
+    setInterval(() => {
+      if(time > 0){
+        time--;
+        counter.innerText = time;
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
