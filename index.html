@@ -5,156 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ad Circle</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-body {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
-  scroll-behavior: smooth;
+body{
+  color:white;
+  overflow-x:hidden;
+  background: radial-gradient(circle at top, #ff0000, #0a0a0a);
+}
+
+/* BACKGROUND ANIMATION */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle, rgba(255,0,0,0.2), transparent);
+  animation: moveBg 10s linear infinite;
+}
+
+@keyframes moveBg{
+  0%{transform:translate(0,0);}
+  50%{transform:translate(-25%,-25%);}
+  100%{transform:translate(0,0);}
 }
 
 /* NAVBAR */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 40px;
-  position: sticky;
-  top: 0;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(10px);
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  animation: fadeSlide 2s ease;
+.logo{
+  font-size:22px;
+  font-weight:700;
+  animation: fadeSlide 1.5s ease;
 }
 
-.menu {
-  cursor: pointer;
-  font-size: 24px;
+.nav-links a{
+  margin:0 15px;
+  text-decoration:none;
+  color:white;
+  cursor:pointer;
+}
+
+.menu{
+  cursor:pointer;
+  font-size:22px;
 }
 
 /* DROPDOWN */
-.dropdown {
-  position: absolute;
-  right: 40px;
-  top: 70px;
-  background: #1e293b;
-  padding: 15px;
-  border-radius: 10px;
-  display: none;
-}
-
-.dropdown a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  margin: 10px 0;
+.dropdown{
+  position:absolute;
+  right:40px;
+  top:60px;
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  display:none;
 }
 
 /* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: url('https://images.unsplash.com/photo-1559526324-593bc073d938') center/cover;
-  position: relative;
+.hero{
+  text-align:center;
+  padding:120px 20px;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
+.hero h1{
+  font-size:42px;
+  animation: fadeUp 1.2s ease;
 }
 
-.hero h1, .hero p {
-  position: relative;
-  z-index: 2;
+.hero p{
+  color:#ddd;
 }
 
-.hero h1 {
-  font-size: 40px;
-  animation: fadeUp 1.5s ease;
+/* BUTTON */
+.btn{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:500;
+  animation: blink 2s infinite;
 }
 
-.hero p {
-  margin-top: 10px;
-  color: #cbd5f5;
-}
-
-/* SECTION */
-.section {
-  padding: 80px 20px;
-  text-align: center;
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:0.6;}
 }
 
 /* SERVICES */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-  padding: 40px;
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:40px;
 }
 
-.card {
-  padding: 30px;
-  border-radius: 15px;
-  transition: 0.3s;
-  backdrop-filter: blur(10px);
+.card{
+  padding:30px;
+  border-radius:15px;
+  transition:0.3s;
+  text-align:center;
 }
 
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
+.card:hover{
+  transform:scale(1.05);
 }
 
-/* Different Gradients */
-.meta {
-  background: linear-gradient(135deg, #6366f1, #3b82f6);
+/* COLORS */
+.meta{
+  background:#1877f2;
+  box-shadow:0 0 15px #1877f2;
 }
 
-.landing {
-  background: linear-gradient(135deg, #f59e0b, #facc15);
+.landing{
+  background:#ff9800;
+  box-shadow:0 0 15px #ff9800;
 }
 
-.telegram {
-  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+.telegram{
+  background:#229ED9;
+  box-shadow:0 0 20px #229ED9;
 }
 
-.trading {
-  background: linear-gradient(135deg, #ef4444, #22c55e);
+.trading{
+  background:linear-gradient(135deg,#8b0000,#00ff00);
+  box-shadow:0 0 20px #ff0000;
 }
 
-/* TRUST */
-.trust {
-  opacity: 0.9;
+/* FLOATING WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  padding:15px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 0 15px #25D366;
 }
 
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from {opacity:0; transform: translateY(30px);}
-  to {opacity:1; transform: translateY(0);}
+/* ANIMATION */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-@keyframes fadeSlide {
-  from {opacity:0; transform: translateX(-50px);}
-  to {opacity:1; transform: translateX(0);}
-}
-
-/* FOOTER */
-.footer {
-  text-align: center;
-  padding: 40px;
-  background: #020617;
+@keyframes fadeSlide{
+  from{opacity:0; transform:translateX(-30px);}
+  to{opacity:1; transform:translateX(0);}
 }
 
 </style>
@@ -162,75 +174,72 @@ body {
 
 <body>
 
+<!-- CLICK SOUND -->
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
 <!-- NAVBAR -->
 <div class="navbar">
   <div class="logo">Ad Circle</div>
-  <div class="menu" onclick="toggleMenu()">⋮</div>
+
+  <div class="nav-links">
+    <a onclick="playSound()">Home</a>
+    <a onclick="playSound()">About</a>
+    <a onclick="playSound()">Services</a>
+  </div>
+
+  <div class="menu" onclick="toggleMenu();playSound()">⋮</div>
 </div>
 
 <div class="dropdown" id="menuBox">
-  <a href="#">📞 Contact: 9876543210</a>
-  <a href="#">💬 WhatsApp</a>
-  <a href="#">📩 Telegram</a>
+  <p onclick="playSound()">📞 9876543210</p>
+  <p onclick="playSound()">💬 WhatsApp</p>
+  <p onclick="playSound()">📩 Telegram</p>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Scale Your Business with Smart Ads 🚀</h1>
+  <h1>Scale Your Business 🚀</h1>
   <p>Meta Ads | Landing Pages | Lead Generation</p>
-</div>
-
-<!-- TRUST -->
-<div class="section trust">
-  <h2>Helping Businesses Grow</h2>
-  <p>50+ Campaigns | ₹1L+ Ad Spend | Multiple Niches</p>
+  <button class="btn" onclick="playSound()">Get Started</button>
 </div>
 
 <!-- SERVICES -->
-<div class="section">
-  <h2>Our Services</h2>
+<div class="services">
 
-  <div class="services">
-
-    <div class="card meta">
-      <h3>Meta Ads</h3>
-      <p>High performing Facebook & Instagram Ads</p>
-    </div>
-
-    <div class="card landing">
-      <h3>Landing Page</h3>
-      <p>Convert visitors into customers</p>
-    </div>
-
-    <div class="card telegram">
-      <h3>Telegram Members</h3>
-      <p>Grow your Telegram audience fast</p>
-    </div>
-
-    <div class="card trading">
-      <h3>Trading / Stock Ads</h3>
-      <p>Generate quality leads</p>
-    </div>
-
+  <div class="card meta">
+    <h3>Meta Ads</h3>
   </div>
+
+  <div class="card landing">
+    <h3>Landing Page</h3>
+  </div>
+
+  <div class="card telegram">
+    <h3>Telegram Members</h3>
+  </div>
+
+  <div class="card trading">
+    <h3>Trading / Stock Ads</h3>
+  </div>
+
 </div>
 
-<!-- CASE STUDY -->
-<div class="section">
-  <h2>Results We've Delivered</h2>
-  <p>Generated 1,500+ leads in 7 days</p>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-  <p>© 2026 Ad Circle</p>
-</div>
+<!-- WHATSAPP FLOAT -->
+<div class="whatsapp" onclick="playSound()">💬</div>
 
 <script>
-function toggleMenu() {
-  let menu = document.getElementById("menuBox");
-  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+
+function toggleMenu(){
+  let menu=document.getElementById("menuBox");
+  menu.style.display=(menu.style.display==="block")?"none":"block";
 }
+
+function playSound(){
+  let sound=document.getElementById("clickSound");
+  sound.currentTime=0;
+  sound.play();
+}
+
 </script>
 
 </body>
