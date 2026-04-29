@@ -5,37 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ad Circle</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#050505;color:white;overflow-x:hidden;}
 
-body{
-  color:white;
-  overflow-x:hidden;
-  background: radial-gradient(circle at top, #ff0000, #0a0a0a);
-}
-
-/* BACKGROUND ANIMATION */
-body::before{
-  content:"";
+/* PARTICLE BACKGROUND */
+canvas{
   position:fixed;
-  width:200%;
-  height:200%;
-  background: radial-gradient(circle, rgba(255,0,0,0.2), transparent);
-  animation: moveBg 10s linear infinite;
-}
-
-@keyframes moveBg{
-  0%{transform:translate(0,0);}
-  50%{transform:translate(-25%,-25%);}
-  100%{transform:translate(0,0);}
+  top:0;left:0;
+  z-index:-1;
 }
 
 /* NAVBAR */
@@ -45,107 +27,115 @@ body::before{
   padding:20px 40px;
 }
 
-.logo{
-  font-size:22px;
-  font-weight:700;
-  animation: fadeSlide 1.5s ease;
-}
-
 .nav-links a{
-  margin:0 15px;
-  text-decoration:none;
-  color:white;
+  margin:0 12px;
   cursor:pointer;
 }
 
-.menu{
-  cursor:pointer;
+/* LOGO */
+.logo{
+  font-weight:800;
   font-size:22px;
+  color:#ff0000;
+  animation:logoAnim 3s infinite alternate;
 }
 
-/* DROPDOWN */
-.dropdown{
-  position:absolute;
-  right:40px;
-  top:60px;
-  background:#111;
-  padding:15px;
-  border-radius:10px;
-  display:none;
+@keyframes logoAnim{
+  from{text-shadow:0 0 10px red;}
+  to{text-shadow:0 0 30px red;}
 }
 
 /* HERO */
 .hero{
-  text-align:center;
-  padding:120px 20px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  padding:80px 20px;
 }
 
+.left{
+  flex:1;
+  min-width:300px;
+}
+
+.right{
+  flex:1;
+  min-width:300px;
+  text-align:center;
+}
+
+/* TEXT */
 .hero h1{
   font-size:42px;
-  animation: fadeUp 1.2s ease;
+  color:#ff0000;
 }
 
 .hero p{
-  color:#ddd;
+  margin:10px 0;
 }
 
 /* BUTTON */
 .btn{
-  margin-top:20px;
+  display:inline-block;
   padding:12px 25px;
-  border:none;
+  margin-top:15px;
   border-radius:30px;
   cursor:pointer;
-  font-weight:500;
-  animation: blink 2s infinite;
+  background:linear-gradient(135deg,#ff0000,#ff9900);
+  box-shadow:0 0 20px red;
+  transition:0.3s;
 }
 
-@keyframes blink{
-  0%,100%{opacity:1;}
-  50%{opacity:0.6;}
+.btn:hover{
+  transform:scale(1.05);
+}
+
+/* GLASS BOX */
+.glass{
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 20px rgba(255,0,0,0.3);
 }
 
 /* SERVICES */
 .services{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:40px;
-}
-
-.card{
-  padding:30px;
-  border-radius:15px;
-  transition:0.3s;
+  padding:60px 20px;
   text-align:center;
 }
 
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.card{
+  padding:25px;
+  border-radius:15px;
+  transition:0.3s;
+}
+
 .card:hover{
-  transform:scale(1.05);
+  transform:translateY(-10px);
 }
 
 /* COLORS */
-.meta{
-  background:#1877f2;
-  box-shadow:0 0 15px #1877f2;
+.meta{background:#1877f2;box-shadow:0 0 20px #1877f2;}
+.telegram{background:#229ED9;box-shadow:0 0 20px #229ED9;}
+.trading{background:linear-gradient(135deg,#8b0000,#00ff00);box-shadow:0 0 20px red;}
+.landing{background:#ff9900;box-shadow:0 0 20px orange;}
+
+/* SECTION */
+.section{
+  padding:60px 20px;
+  text-align:center;
 }
 
-.landing{
-  background:#ff9800;
-  box-shadow:0 0 15px #ff9800;
-}
-
-.telegram{
-  background:#229ED9;
-  box-shadow:0 0 20px #229ED9;
-}
-
-.trading{
-  background:linear-gradient(135deg,#8b0000,#00ff00);
-  box-shadow:0 0 20px #ff0000;
-}
-
-/* FLOATING WHATSAPP */
+/* WHATSAPP */
 .whatsapp{
   position:fixed;
   bottom:20px;
@@ -153,20 +143,8 @@ body::before{
   background:#25D366;
   padding:15px;
   border-radius:50%;
-  font-size:20px;
+  box-shadow:0 0 20px #25D366;
   cursor:pointer;
-  box-shadow:0 0 15px #25D366;
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes fadeSlide{
-  from{opacity:0; transform:translateX(-30px);}
-  to{opacity:1; transform:translateX(0);}
 }
 
 </style>
@@ -174,71 +152,114 @@ body::before{
 
 <body>
 
-<!-- CLICK SOUND -->
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<canvas id="bg"></canvas>
 
 <!-- NAVBAR -->
 <div class="navbar">
   <div class="logo">Ad Circle</div>
 
   <div class="nav-links">
-    <a onclick="playSound()">Home</a>
-    <a onclick="playSound()">About</a>
-    <a onclick="playSound()">Services</a>
+    <a onclick="go('home')">Home</a>
+    <a onclick="go('services')">Services</a>
+    <a onclick="go('contact')">Contact</a>
   </div>
-
-  <div class="menu" onclick="toggleMenu();playSound()">⋮</div>
-</div>
-
-<div class="dropdown" id="menuBox">
-  <p onclick="playSound()">📞 9876543210</p>
-  <p onclick="playSound()">💬 WhatsApp</p>
-  <p onclick="playSound()">📩 Telegram</p>
 </div>
 
 <!-- HERO -->
-<div class="hero">
-  <h1>Scale Your Business 🚀</h1>
-  <p>Meta Ads | Landing Pages | Lead Generation</p>
-  <button class="btn" onclick="playSound()">Get Started</button>
+<div id="home" class="hero">
+
+  <div class="left">
+    <h1>Scale Your Business 🚀</h1>
+    <p>Meta Ads | Landing Pages | Lead Generation</p>
+    <div class="btn" onclick="openWA()">Start Campaign</div>
+  </div>
+
+  <div class="right">
+    <div class="glass">
+      <h2>₹1599</h2>
+      <p>Complete Ad Setup</p>
+      <p>₹1 - ₹2 CPC</p>
+    </div>
+  </div>
+
 </div>
 
 <!-- SERVICES -->
-<div class="services">
+<div id="services" class="services">
 
-  <div class="card meta">
-    <h3>Meta Ads</h3>
-  </div>
+  <h2>Our Services</h2>
 
-  <div class="card landing">
-    <h3>Landing Page</h3>
-  </div>
+  <div class="cards">
 
-  <div class="card telegram">
-    <h3>Telegram Members</h3>
-  </div>
+    <div class="card meta">Meta Ads</div>
+    <div class="card telegram">Telegram Members</div>
+    <div class="card trading">Trading Ads</div>
+    <div class="card landing">Landing Pages</div>
 
-  <div class="card trading">
-    <h3>Trading / Stock Ads</h3>
   </div>
 
 </div>
 
-<!-- WHATSAPP FLOAT -->
-<div class="whatsapp" onclick="playSound()">💬</div>
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <h2>Contact Us</h2>
+  <div class="btn" onclick="openWA()">WhatsApp Now</div>
+</div>
+
+<!-- WHATSAPP -->
+<div class="whatsapp" onclick="openWA()">💬</div>
 
 <script>
 
-function toggleMenu(){
-  let menu=document.getElementById("menuBox");
-  menu.style.display=(menu.style.display==="block")?"none":"block";
+/* NAV SCROLL */
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-function playSound(){
-  let sound=document.getElementById("clickSound");
-  sound.currentTime=0;
-  sound.play();
+/* WHATSAPP */
+function openWA(){
+  window.open("https://wa.me/919876543210","_blank");
 }
+
+/* PARTICLES */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    dx:Math.random()*1,
+    dy:Math.random()*1
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle="red";
+    ctx.fill();
+
+    p.x+=p.dx;
+    p.y+=p.dy;
+
+    if(p.x>canvas.width) p.x=0;
+    if(p.y>canvas.height) p.y=0;
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
 
 </script>
 
